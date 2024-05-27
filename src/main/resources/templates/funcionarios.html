@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Funcionários</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        * {
+      box-sizing: border-box;
+  }
+
+  html {
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      height: 100%;
+  }
+
+  body {
+      font-family: 'Arial', sans-serif;
+      margin: 70px auto;
+      width: 67%;
+      padding: 0;
+      background: #F4F2F2;
+  }
+
+  .navbar-inverse {
+      background-color: #74ebd5;
+      border-color: #ACB6E5;
+  }
+
+  .navbar-inverse .navbar-brand {
+      color: #fff;
+  }
+
+  .navbar-inverse .navbar-nav > li > a {
+      color: #fff;
+  }
+
+  .sidenav {
+      background-color: #fff;
+      height: calc(100vh - 140px);
+      width: 18%;
+      border-right: 1px solid #888888;
+      padding-top: 20px;
+  }
+
+  .sidenav h2, .sidenav a {
+      color: #333;
+  }
+
+  .nav-pills > li > a {
+      color: #333;
+      background-color: #eaeaea;
+      margin-bottom: 5px;
+  }
+
+  .nav-pills > li.active > a, .nav-pills > li.active > a:hover {
+      background-color: #ACB6E5;
+      color: #fff;
+  }
+
+  .well {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      height: 100px;
+  }
+
+  .well h4 {
+      color: #333;
+  }
+
+  .row.content {
+      height: auto;
+      margin-right: -15px;
+      margin-left: -15px;
+  }
+
+  .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .header-row h1 {
+      font-size: 2.5em;
+      margin: 0;
+      color: #333;
+  }
+
+  .header-row .user-icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+  }
+
+  .header-row .user-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+  }
+
+  .header-row .user-icon a {
+      color: #333;
+      text-decoration: none;
+  }
+
+  @media screen and (max-width: 767px) {
+      .row.content {
+          height: auto;
+      }
+
+      .sidenav {
+          width: 100%;
+          height: auto;
+      }
+
+      .horizontal-div {
+          height: auto;
+      }
+  }
+
+  .horizontal-div {
+      width: 100%;
+      height: 9vh;
+      background-color: #fff;
+      align-items: center;
+      padding-left: 100px;
+      padding: 20px;
+  }
+
+  h1 {
+      margin: 0;
+  }
+
+  .nav-stacked li {
+      margin-bottom: 10px;
+      position: relative;
+      padding: 8px;
+      font-size: 18px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+  }
+
+  .nav-stacked li:last-child {
+      margin-bottom: 0;
+  }
+
+  .nav-stacked li a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #333;
+  }
+
+  .nav-stacked li a::after {
+      content: '\f105';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      margin-left: 8px;
+  }
+
+  .nav-stacked li a img {
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+  }
+  .circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #D6D6D6;
+    margin-right: 10px;
+    margin-top: -5px;
+  }
+ .title {
+    position: absolute;
+    font-size: 20px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    margin-top: 35px;
+    z-index: 1;
+}
+         .title2 {
+    position: absolute;
+    font-size: 30px;
+    top: 0;
+    left: 58%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding-left: 69px;
+    margin-top: 63px;
+    z-index: 1;
+}
+        .data {
+    position: absolute;
+    top: 62px;
+    left: 45%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1;
+}
+.data2 {
+    display: inline-block;
+    margin-right: 10px;
+}
+.additional-text {
+    display: inline-block;
+    font-size: 16px;
+}
+.data3 {
+    position: absolute;
+    top: 90px;
+    left: 45%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1;
+}
+.data-container {
+    position: absolute;
+    top: 90px;
+    left: 58%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1;
+}
+        .search-container {
+    position: relative;
+}
+
+.search-bar {
+    margin-left: 200px;
+    padding: 8px 30px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.search-button {
+    margin-left: -40px;
+    top: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+ .user {
+ width: 30px;
+    margin-left: 17px;
+    top: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+ .bell {
+ width: 23px;
+    margin-left: 15px;
+    top: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.plus {
+width: 30px;
+    margin-left: 260px;
+    top: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.flatpickr-calendar {
+    background-color: #fff;
+}
+
+
+.flatpickr-calendar {
+    color: #333;
+}
+
+
+.flatpickr-input {
+    border: 1px solid #ccc;
+}
+
+
+.flatpickr-time {
+    background-color: #f0f0f0;
+}
+
+.flatpickr-time {
+    color: #333;
+}
+
+.flatpickr-time-dropdown {
+    background-color: #fff;
+}
+
+.flatpickr-time-dropdown {
+    color: #333;
+}
+
+.flatpickr-time-dropdown:hover {
+    background-color: #f0f0f0;
+}
+
+
+form input[type="text"],
+form input[type="number"],
+form select {
+
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 3px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+
+form select {
+background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+
+form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 16px;
+    background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav hidden-xs" >
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1518/1518886.png" alt="GymManager" style="width: 60px; height: 58px;">
+                </div>
+                <div class="col-sm-1">
+                    <h3 style="font-size: 20px; margin-bottom: 70px; padding-bottom: 40px;">GymManager</h3>
+                </div>
+            </div>
+            <ul class="nav nav-stacked">
+                <li class="active"><a href="dashboard"><img src="https://img.icons8.com/?size=50&id=vFqlDrzMYOT0&format=png" alt="Dashboard">Dashboard</a></li>
+                <li><a href="#section2"><img src="https://www.svgrepo.com/show/86725/person.svg" alt="Alunos">Alunos</a></li>
+                <li><a href="funcionarios"><img src="https://cdn-icons-png.freepik.com/256/782/782899.png?semt=ais_hybrid" alt="Funcionários">Funcionários</a></li>
+                <li><a href="#section4"><img src="https://www.svgrepo.com/show/592/money.svg" alt="Financeiro">Financeiro</a></li>
+                <li><a href="#section5"><img src="https://www.svgrepo.com/download/43043/report.svg" alt="Relatórios">Relatórios</a></li>
+            </ul><br>
+        </div>
+        <div class="horizontal-div">
+            <img src="https://cdn-icons-png.flaticon.com/128/12314/12314153.png" style="width: 40px; height: 40px; margin-right: 10px; margin-left: 50px;" alt="Dashboard Icon" class="dashboard-icon">
+            <span style="font-size: 20px;">Funcionários</span>
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <button class="search-button"><i class="fas fa-search"></i></button>
+            <img class="plus" src="https://cdn2.iconfinder.com/data/icons/everything-but-the-kitchen-sink-2/100/common-06-512.png" alt="Add">
+            <img class="bell" src="https://static-00.iconduck.com/assets.00/notification-bell-icon-1775x2048-y1w4ovo2.png" alt="Notification">
+            <img class="user" src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png" alt="Notification">
+        </div>
+        <div class="col-sm-1" style="padding-left: 90px; padding-top: 50px; width: 36%;">
+            <div class="well">
+                <h5 class="title2">Cadastrar funcionário</h5>
+                <span class="circle">
+                    <img src="https://www.svgrepo.com/show/2087/plus.svg" alt="Alunos" style="width: 80%; height: 100%; border-radius: 10%;">
+                </span>
+            </div>
+            <form th:action="@{/submit}" method="post" style="background-color: #fff; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); padding: 20px;">
+                    <label for="tipo">Tipo de Funcionário:</label>
+                    <select id="tipo" name="tipo">
+                        <option value="Personal">Personal</option>
+                        <option value="Dança">Dança</option>
+                        <option value="Instrutor">Instrutor</option>
+                    </select><br><br>
+
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome"><br><br>
+
+                    <label for="idade">Idade:</label>
+                    <input type="number" id="idade" name="idade" min="18" max="99"><br><br>
+
+                    <label for="genero">Gênero:</label>
+                    <select id="genero" name="genero">
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outro">Outro</option>
+                    </select><br><br>
+
+                <label for="horarioInicio">Início:</label>
+                <input type="text" id="horarioInicio" name="horarioInicio" placeholder="Início"><br><br>
+
+                <label for="horarioFim">Término:</label>
+                <input type="text" id="horarioFim" name="horarioFim" placeholder="Término"><br><br>
+
+                    <button type="submit">Enviar</button>
+                </form>
+        </div>
+        <div class="col-sm-5" style="padding-left: 80px; padding-top: 50px; width: 36%;">
+            <div class="well">
+                <h5 class="title2">Lista de Funcionários</h5>
+
+                <span class="circle">
+                    <img src="https://cdn-icons-png.freepik.com/256/782/782899.png?semt=ais_hybrid" alt="Receita" style="width: 100%; height: 100%; border-radius: 50%;">
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-5" style="padding-left: 80px; width: 36%;">
+            <div class="well">
+                <ul th:if="${employees}" class="employee-list">
+                    <li th:each="employee : ${employees}">
+
+                        <span th:text="${employee.nome}"></span>
+                        <br>
+                        <span th:text="${employee.tipo}"></span>
+                    </li>
+                </ul>
+                <div th:unless="${employees}">Nenhum funcionário encontrado.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    flatpickr("#horarioInicio", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true,
+    });
+
+    flatpickr("#horarioFim", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true,
+    });
+</script>
+</body>
+</html>

@@ -21,7 +21,7 @@ public class FuncionarioController {
 
     @GetMapping("/funcionarios")
     public String funcionariosPage(Model model) {
-        List<FuncionarioEntity> employees = funcionarioRepository.findAll(); // Assuming findAll() method exists in your repository
+        List<FuncionarioEntity> employees = funcionarioRepository.findAll();
         model.addAttribute("employees", employees);
         return "funcionarios";
     }
